@@ -1,0 +1,4 @@
+const SUPABASE_URL = "COLE_AQUI_SUA_PROJECT_URL";
+const SUPABASE_KEY = "COLE_AQUI_SUA_ANON_OU_PUBLISHABLE_KEY";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
