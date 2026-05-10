@@ -1,5 +1,5 @@
-const SUPABASE_URL = "https://movimento-que-transforma.vercel.app/";
-const SUPABASE_KEY = "sb_publishable_U4B_BYUnAHDKdWsDe7-7cQ_wI0D6Vob";
+const SUPABASE_URL = "https://vvbbhvccbfhmpkbyqvdn.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_yu9Uwwm4cmiwSPuauaNJrg_OCz2bW_i";
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const { data, error } = await supabaseClient
