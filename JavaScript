@@ -18,3 +18,22 @@ if (error) {
   alert("Erro ao salvar inscrição: " + error.message);
   return;
 }
+
+const { error } = await supabaseClient
+  .from("inscricoes")
+  .insert({
+    protocolo: protocolo,
+    status: totalInscricoes > LIMITE_VAGAS ? "Lista de espera" : "Inscrito",
+    projeto: modalidade,
+    nome_aluno: document.getElementById("nomeAluno").value,
+    idade: 10,
+    nome_responsavel: "Responsável",
+    telefone_contato: "Telefone",
+    termo_aceite: true
+  });
+
+if (error) {
+  alert("Erro ao salvar no Supabase: " + error.message);
+  console.log(error);
+  return;
+}
