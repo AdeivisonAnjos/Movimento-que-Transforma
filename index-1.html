@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movimento que Transforma | Inscrição</title>
+
+  <style>
+    :root {
+      --azul: #004AAD;
+      --azul-escuro: #00327A;
+      --laranja: #FF7A00;
+      --laranja-claro: #FFB366;
+      --branco: #FFFFFF;
+      --cinza: #F4F7FB;
+      --texto: #1F2937;
+      --verde: #16A34A;
+      --vermelho: #DC2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: var(--branco);
+      color: var(--texto);
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff 0%, #f7fbff 100%);
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 430px;
+      min-height: 760px;
+      background: var(--branco);
+      border-radius: 32px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      position: relative;
+      padding: 36px 26px;
+      text-align: center;
+      border: 4px solid var(--azul);
+    }
+
+    .story-card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      left: -90px;
+      width: 230px;
+      height: 230px;
+      background: var(--laranja);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .story-card::after {
+      content: "";
+      position: absolute;
+      bottom: -90px;
+      right: -100px;
+      width: 250px;
+      height: 250px;
+      background: var(--azul);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-icon {
+      width: 110px;
+      height: 80px;
+      margin: 0 auto 12px;
+      position: relative;
+    }
+
+    .logo-icon span {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-35deg);
+    }
+
+    .logo-icon .orange {
+      background: var(--laranja);
+      left: 13px;
+      top: 16px;
+    }
+
+    .logo-icon .blue {
+      background: var(--azul);
+      right: 13px;
+      top: 16px;
+      transform: rotate(215deg);
+    }
+
+    .logo-icon .star {
+      position: absolute;
+      left: 47px;
+      top: 0;
+      color: var(--laranja);
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    h1 {
+      color: var(--azul);
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 strong {
+      color: var(--laranja);
+      display: block;
+      font-size: 42px;
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      color: var(--azul);
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .hero-text {
+      margin: 24px 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .modalidades {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .modalidade {
+      background: var(--cinza);
+      color: var(--azul);
+      padding: 14px 8px;
+      border-radius: 18px;
+      font-weight: bold;
+      border: 2px solid #e7efff;
+    }
+
+    .modalidade span {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .info-box {
+      background: var(--azul);
+      color: white;
+      border-radius: 20px;
+      padding: 18px;
+      margin: 18px 0;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      padding: 16px 22px;
+      border-radius: 18px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      background: var(--laranja);
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 122, 0, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: #e96f00;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--azul);
+      color: white;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      border-radius: 26px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+      padding: 30px;
+      border-top: 8px solid var(--laranja);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .form-header h2 {
+      color: var(--azul);
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .form-header p {
+      color: #555;
+      font-size: 15px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      color: var(--azul);
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd6e0;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--laranja);
+      box-shadow: 0 0 0 3px rgba(255,122,0,0.15);
+    }
+
+    .section-title {
+      grid-column: 1 / -1;
+      background: var(--azul);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    .radio-group label {
+      color: var(--texto);
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+    }
+
+    .radio-group input {
+      width: auto;
+    }
+
+    .alerta {
+      background: #fff7ed;
+      border-left: 6px solid var(--laranja);
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .termo {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--cinza);
+      padding: 16px;
+      border-radius: 14px;
+      line-height: 1.5;
+    }
+
+    .termo input {
+      width: auto;
+      margin-top: 4px;
+    }
+
+    .success-icon {
+      width: 110px;
+      height: 110px;
+      background: #ecfdf5;
+      color: var(--verde);
+      border: 5px solid var(--verde);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      margin: 30px auto;
+      font-weight: bold;
+    }
+
+    .final-title {
+      color: var(--azul);
+      font-size: 32px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .final-title span {
+      color: var(--laranja);
+      display: block;
+    }
+
+    .protocolo {
+      margin: 24px 0;
+      background: var(--cinza);
+      padding: 18px;
+      border-radius: 16px;
+      font-weight: bold;
+      color: var(--azul);
+    }
+
+    .small {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.5;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 700px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .form-container {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      h1 strong {
+        font-size: 36px;
+      }
+
+      .story-card {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TELA ANTES DA INSCRIÇÃO -->
+  <section id="inicio" class="screen active">
+    <div class="story-card">
+      <div class="content">
+        <div class="logo-icon">
+          <span class="orange"></span>
+          <span class="blue"></span>
+          <div class="star">★</div>
+        </div>
+
+        <h1>Movimento que <strong>Transforma</strong></h1>
+
+        <p class="subtitle">Esporte, Educação e Cultura transformando vidas!</p>
+
+        <div class="hero-text">
+          Estão abertas as inscrições gratuitas para crianças e adolescentes de 7 a 17 anos.
+        </div>
+
+        <div class="modalidades">
+          <div class="modalidade"><span>⚽</span>Futsal</div>
+          <div class="modalidade"><span>🏐</span>Vôlei</div>
+          <div class="modalidade"><span>📚</span>Reforço Escolar</div>
+          <div class="modalidade"><span>🎵</span>Música</div>
+          <div class="modalidade full"><span>🥋</span>Judô</div>
+        </div>
+
+        <div class="info-box">
+          <strong>Região atendida:</strong><br>
+          Grande Goiabeiras: Maria Ortiz 1 e 2, Jabour, Aeroporto, Segurança do Lar,
+          Solon Borges, República, Morada de Camburi, Mata da Praia, Jardim da Penha,
+          Jardim Camburi, Jardim Carapina e Bairro de Fátima.
+        </div>
+
+        <button class="btn btn-primary" onclick="mostrarTela('formulario')">
+          INSCREVA-SE AGORA
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO -->
+  <section id="formulario" class="screen">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Ficha de Inscrição</h2>
+        <p>Preencha os dados com atenção. As vagas serão por ordem de inscrição.</p>
+      </div>
+
+      <form id="inscricaoForm">
+        <div class="section-title">Dados do Aluno</div>
+
+        <div class="full">
+          <label>Nome Completo do Participante</label>
+          <input type="text" required />
+        </div>
+
+        <div>
+          <label>Idade</label>
+          <input type="number" min="7" max="17" required />
+        </div>
+
+        <div>
+          <label>Sexo</label>
+          <select required>
+            <option value="">Selecione</option>
+            <option>Masculino</option>
+            <option>Feminino</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Data de Nascimento</label>
+          <input type="date" required />
+        </div>
+
+        <div>
+          <label>Tamanho de Camisa</label>
+          <select required>
+            <option value="">Selecione</option>
+            <option>8</option>
+            <option>10</option>
+            <option>12</option>
+            <option>14</option>
+            <option>P Adulto</option>
+            <option>M</option>
+            <option>G</option>
+            <option>GG</option>
+            <option>EXG</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label>Nome Completo do Responsável</label>
+          <input type="text" required />
+        </div>
+
+        <div>
+          <label>Telefone de Contato com DDD</label>
+          <input type="tel" placeholder="(27) 99999-9999" required />
+        </div>
+
+        <div>
+          <label>Telefone de Emergência</label>
+          <input type="text" placeholder="Nome e número da pessoa" required />
+        </div>
+
+        <div class="full">
+          <label>Endereço Completo</label>
+          <input type="text" placeholder="Rua, número, bairro e município" required />
+        </div>
+
+        <div>
+          <label>Bairro</label>
+          <input type="text" required />
+        </div>
+
+        <div>
+          <label>Município</label>
+          <input type="text" required />
+        </div>
+
+        <div class="full">
+          <label>Modalidade Preferida</label>
+          <select required>
+            <option value="">Selecione</option>
+            <option>Futsal</option>
+            <option>Vôlei</option>
+            <option>Reforço Escolar</option>
+            <option>Música</option>
+            <option>Judô</option>
+          </select>
+        </div>
+
+        <div class="section-title">Questionário de Aptidão Física - PAR-Q</div>
+
+        <div class="full">
+          <label>Algum médico já disse que o aluno possui problema de coração?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q1" required /> Sim</label>
+            <label><input type="radio" name="q1" required /> Não</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label>O aluno sente dores no peito quando pratica atividade física?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q2" required /> Sim</label>
+            <label><input type="radio" name="q2" required /> Não</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label>O aluno apresenta tontura ou perda de consciência?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q3" required /> Sim</label>
+            <label><input type="radio" name="q3" required /> Não</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label>O aluno possui problema ósseo ou articular?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q4" required /> Sim</label>
+            <label><input type="radio" name="q4" required /> Não</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label>O aluno toma medicamento para pressão arterial ou coração?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q5" required /> Sim</label>
+            <label><input type="radio" name="q5" required /> Não</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label>Sabe de alguma outra razão pela qual o aluno não deve praticar atividade física?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="q6" required /> Sim</label>
+            <label><input type="radio" name="q6" required /> Não</label>
+          </div>
+        </div>
+
+        <div>
+          <label>Possui doença ou deficiência?</label>
+          <select required>
+            <option value="">Selecione</option>
+            <option>Não</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Se marcou outro, especifique</label>
+          <input type="text" />
+        </div>
+
+        <div>
+          <label>Possui alergia?</label>
+          <select required>
+            <option value="">Selecione</option>
+            <option>Não</option>
+            <option>Não sei</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Se marcou outro, especifique</label>
+          <input type="text" />
+        </div>
+
+        <div class="full alerta">
+          <strong>Atenção:</strong> As vagas serão preenchidas por ordem de inscrição.
+          A inscrição somente será efetivada após entrega completa dos documentos e assinatura presencial da ficha de matrícula.
+        </div>
+
+        <div class="full termo">
+          <input type="checkbox" id="termo" required />
+          <label for="termo">
+            Declaro que as informações fornecidas são verdadeiras e estou ciente e concordo com a participação no Projeto Movimento que Transforma, assumindo a responsabilidade pela condição de saúde e aptidão física do participante. Autorizo o uso da imagem e voz do participante em materiais de divulgação do projeto.
+          </label>
+        </div>
+
+        <div class="full">
+          <button class="btn btn-primary" type="submit">FINALIZAR INSCRIÇÃO</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- TELA FINAL -->
+  <section id="final" class="screen">
+    <div class="story-card">
+      <div class="content">
+        <div class="logo-icon">
+          <span class="orange"></span>
+          <span class="blue"></span>
+          <div class="star">★</div>
+        </div>
+
+        <div class="success-icon">✓</div>
+
+        <h2 class="final-title">
+          Inscrição realizada
+          <span id="statusFinal">com sucesso!</span>
+        </h2>
+
+        <div class="protocolo">
+          Protocolo: <span id="protocoloNumero"></span>
+        </div>
+
+        <p class="hero-text">
+          Obrigado por fazer parte do Movimento que Transforma.
+          Em breve, você receberá mais informações através do contato cadastrado.
+        </p>
+
+        <div class="info-box">
+          As turmas serão formadas de acordo com as inscrições. Fique atento!
+          As informações chegarão através do contato cadastrado.
+        </div>
+
+        <p class="small">
+          Juntos, vamos transformar vidas!
+        </p>
+
+        <button class="btn btn-secondary" onclick="mostrarTela('inicio')">
+          VOLTAR AO INÍCIO
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const LIMITE_VAGAS = 50;
+    let totalInscricoes = Number(localStorage.getItem("totalInscricoesMovimento")) || 0;
+
+    function mostrarTela(id) {
+      document.querySelectorAll(".screen").forEach(tela => {
+        tela.classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+      window.scrollTo(0, 0);
+    }
+
+    document.getElementById("inscricaoForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const termo = document.getElementById("termo");
+
+      if (!termo.checked) {
+        alert("Para finalizar a inscrição, é obrigatório aceitar o termo.");
+        return;
+      }
+
+      totalInscricoes++;
+      localStorage.setItem("totalInscricoesMovimento", totalInscricoes);
+
+      const protocolo = "MT-" + new Date().getFullYear() + "-" + String(totalInscricoes).padStart(4, "0");
+      document.getElementById("protocoloNumero").innerText = protocolo;
+
+      if (totalInscricoes > LIMITE_VAGAS) {
+        document.getElementById("statusFinal").innerText = "em lista de espera!";
+      } else {
+        document.getElementById("statusFinal").innerText = "com sucesso!";
+      }
+
+      this.reset();
+      mostrarTela("final");
+    });
+  </script>
+
+</body>
+</html>
