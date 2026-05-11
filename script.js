@@ -16,6 +16,13 @@ const LIMITE_VAGAS = 50;
 
     function atualizarCamposProjeto() {
       const modalidade = document.getElementById("modalidade").value;
+        const avisoJudo = document.getElementById("avisoJudo");
+
+if (modalidade === "Judô") {
+  avisoJudo.classList.remove("hidden");
+} else {
+  avisoJudo.classList.add("hidden");
+}
 
       const camposEsporte = document.getElementById("camposEsporte");
       const camposReforco = document.getElementById("camposReforco");
