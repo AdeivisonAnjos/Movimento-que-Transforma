@@ -59,14 +59,15 @@ if (modalidade === "Judô") {
       }
 
       if (modalidade === "Reforço Escolar") {
-        const serie = document.getElementById("serie").value;
-        const disciplina = document.getElementById("disciplina").value;
+  const serie = document.getElementById("serie")?.value;
+  const disciplina = document.getElementById("disciplina")?.value;
+  const horarioEstudo = document.getElementById("horarioEstudo")?.value;
 
-        if (!serie || !disciplina) {
-          alert("Para Reforço Escolar, informe a série e a disciplina.");
-          return;
-        }
-      }
+  if (!serie || !disciplina || !horarioEstudo) {
+    alert("Para Reforço Escolar, informe a série, a disciplina e o horário que a criança estuda.");
+    return;
+  }
+}
 
       if (!termo.checked) {
         alert("Para finalizar a inscrição, é obrigatório aceitar o termo.");
