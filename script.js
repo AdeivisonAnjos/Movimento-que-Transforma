@@ -107,55 +107,32 @@ document
       "-" +
       String(totalInscricoes).padStart(4, "0");
 
-    // SALVAR NO SUPABASE
-    const { error } = await supabaseClient
-      .from("inscricoes")
-      .insert({
-        protocolo: protocolo,
+const { error } = await supabaseClient
+  .from("inscricoes")
+  .insert({
+    protocolo: protocolo,
+    status:
+      modalidade === "Judô" || totalInscricoes > LIMITE_VAGAS
+        ? "Lista de espera"
+        : "Inscrito",
+    projeto: modalidade,
+    nome_aluno: document.getElementById("nomeAluno")?.value || "",
+    idade: Number(document.querySelector('input[type="number"]')?.value),
+    nome_responsavel:
+      document.querySelectorAll('input[type="text"]')[1]?.value || "",
+    telefone_contato: document.querySelector('input[type="tel"]')?.value || "",
+    serie: document.getElementById("serie")?.value || null,
+    disciplina: document.getElementById("disciplina")?.value || null,
+    escola: document.getElementById("escola")?.value || null,
+    horario_estudo: document.getElementById("horarioEstudo")?.value || null,
+    termo_aceite: true,
+  });
 
-        status:
-          modalidade === "Judô" ||
-          totalInscricoes > LIMITE_VAGAS
-            ? "Lista de espera"
-            : "Inscrito",
-
-        projeto: modalidade,
-
-        nome_aluno:
-          document.getElementById("nomeAluno")?.value || "",
-
-        idade: Number(
-          document.querySelector('input[type="number"]')?.value
-        ),
-
-        nome_responsavel:
-          document.querySelectorAll('input[type="text"]')[1]
-            ?.value || "",
-
-        telefone_contato:
-          document.querySelector('input[type="tel"]')?.value || "",
-
-        serie: document.getElementById("serie")?.value || null,
-
-        disciplina:
-          document.getElementById("disciplina")?.value || null,
-
-        escola:
-          document.getElementById("escola")?.value || null,
-
-        horario_estudo:
-          document.getElementById("horarioEstudo")?.value || null,
-
-        termo_aceite: true,
-      });
-
-    if (error) {
-      alert("Erro ao salvar no Supabase: " + error.message);
-
-      console.log(error);
-
-      return;
-    }
+if (error) {
+  alert("Erro ao salvar no Supabase: " + error.message);
+  console.log(error);
+  return;
+}
 
     document.getElementById("protocoloNumero").innerText =
       protocolo;
