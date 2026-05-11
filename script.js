@@ -65,14 +65,15 @@ function atualizarCamposProjeto() {
   camposReforco.classList.add("hidden");
   camposMusica.classList.add("hidden");
 
-  if (
-    modalidade === "Futsal" ||
-    modalidade === "Vôlei" ||
-    modalidade === "Judô"
-  ) {
+ if (
+  modalidade === "Futsal" ||
+  modalidade === "Vôlei" ||
+  modalidade === "Judô" ||
+  modalidade === "Dança"
+) {
     camposEsporte.classList.remove("hidden");
     parqArea.classList.remove("hidden");
-  } else if (modalidade === "Reforço Escolar") {
+  } else if (modalidade === "Reforço Escolar" || modalidade === "Idioma Inglês") {
     camposReforco.classList.remove("hidden");
     parqArea.classList.add("hidden");
   } else if (modalidade === "Música") {
@@ -98,7 +99,7 @@ document
     }
 
     // REFORÇO ESCOLAR
-    if (modalidade === "Reforço Escolar") {
+    if (modalidade === "Reforço Escolar" || modalidade === "Idioma Inglês") {
       const serie = document.getElementById("serie")?.value;
 
       const disciplina = document.getElementById("disciplina")?.value;
