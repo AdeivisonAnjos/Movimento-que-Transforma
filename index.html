@@ -288,9 +288,6 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
             <option value="Futsal">Futsal</option>
             <option value="Vôlei">Vôlei</option>
             <option value="Judô">Judô</option>
-            <div id="avisoJudo" class="alerta hidden">
-  ⚠️ No momento, o projeto de Judô está disponível apenas para lista de espera.
-</div>
             <option value="Reforço Escolar">Reforço Escolar</option>
             <option value="Música">Música</option>
           </select>
@@ -298,6 +295,10 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         <div id="camposEsporte" class="full modalidade-card hidden">
           Cadastro esportivo: Futsal, Vôlei ou Judô
+                      
+          id="avisoJudo" class="alerta hidden">
+  ⚠️ No momento, o projeto de Judô está disponível apenas para lista de espera.
+          
           <small>Este cadastro inclui questionário de aptidão física obrigatório.</small>
         </div>
 
@@ -332,6 +333,14 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
           <label>Escola onde o aluno estuda</label>
           <input type="text" id="escola" placeholder="Nome da escola">
+          <br><br>
+
+<label>Qual horário a criança estuda?</label>
+<select id="horarioEstudo">
+  <option value="">Selecione</option>
+  <option>Matutino</option>
+  <option>Vespertino</option>
+</select>
         </div>
 
         <div id="camposMusica" class="full hidden">
